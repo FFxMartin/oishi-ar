@@ -19,19 +19,24 @@
   <div class="wrap">
     <h1>Oishi AR</h1>
     <p>TÙNG TÙNG TÙNG — GỌI MASCOT RA!</p>
-    <model-viewer
-      src="assets/model.glb"
-      alt="Oishi mascot"
-      ar
-      ar-modes="webxr scene-viewer quick-look"
-      camera-controls
-      auto-rotate
-      shadow-intensity="1"
-      exposure="1.05"
-      ar-scale="fixed"
-      xr-environment>
-      <button slot="ar-button" id="ar-button">🐥 XEM TRONG AR</button>
-    </model-viewer>
+   <model-viewer
+  src="assets/model.glb"
+  ios-src="assets/model.usdz"
+
+  ar
+  ar-modes="webxr scene-viewer quick-look"
+
+  camera-controls
+  auto-rotate
+  shadow-intensity="1"
+  exposure="1.05"
+  ar-scale="fixed">
+
+  <button slot="ar-button" id="ar-button">
+    🐥 XEM TRONG AR
+  </button>
+
+</model-viewer>
     <p class="note">Mở trên điện thoại, bấm nút AR, rồi hướng camera xuống mặt bàn hoặc sàn.</p>
   </div>
 </body>
