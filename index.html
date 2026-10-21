@@ -1,81 +1,67 @@
+
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
   <title>Oishi AR</title>
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
+  <!-- CSS được viết trực tiếp trong HTML -->
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #c9151e;
-      color: #fff;
-      text-align: center
-    }
-
-    .wrap {
-      max-width: 900px;
+    .viewer-box {
+      position: relative;
+      width: calc(100% - 48px);
+      height: 610px;
       margin: 0 auto;
-      padding: 20px
+      border-radius: 24px;
+      overflow: hidden;
     }
 
-    h1 {
-      margin: 10px 0 4px
-    }
-
-    p {
-      margin: 6px 0 14px
-    }
-
-    model-viewer {
+    #mascot {
+      display: block;
       width: 100%;
-      height: 70vh;
-      background: linear-gradient(180deg, #df3037, #9f1017);
-      border-radius: 20px
+      height: 100%;
     }
 
-    #ar-button {
-      background: #ffd43b;
-      color: #8b1218;
-      border: none;
-      border-radius: 999px;
-      padding: 14px 24px;
-      font-size: 18px;
-      font-weight: 700;
-      cursor: pointer
-    }
-
-    .note {
-      font-size: 14px;
-      opacity: .9
+    .oishi-gif {
+      position: absolute;
+      width: 140px;
+      height: auto;
+      right: 16px;
+      bottom: 16px;
+      z-index: 10;
+      object-fit: contain;
+      pointer-events: none;
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <h1>Oishi AR</h1>
-    <p>TÙNG TÙNG TÙNG — GỌI MASCOT RA!</p>
 
-    <model-viewer 
-      id="mascot" 
+  <h1>Oishi AR</h1>
+  <p>TÙNG TÙNG TÙNG — GỌI MASCOT RA!</p>
+
+  <!-- Khung chứa model 3D và GIF -->
+  <div class="viewer-box">
+
+    <model-viewer
+      id="mascot"
       src="./assets/cartoon+chicken+3d+model.glb"
-      ios-src="./assets/cartoon+chicken+3d+model.usdz" alt="Oishi mascot 3D" ar ar-modes="quick-look" camera-controls
-      autoplay 
-      animation-name="Armature|Dance" 
-      shadow-intensity="1" 
-      exposure="1.05" 
-      ar-scale="auto"
-      ar-placement="floor">
-      <button slot="ar-button" id="ar-button">
-        🐥 XEM TRONG AR
-      </button>
+      ios-src="./assets/cartoon+chicken+3d+model.usdz"
+      camera-controls
+      ar
+      ar-modes="webxr scene-viewer quick-look">
     </model-viewer>
 
-    <p class="note">Mở trên điện thoại, bấm nút AR, rồi hướng camera xuống mặt bàn hoặc sàn.</p>
-  </div>
-</body>
+    <!-- GIF xuất hiện ở góc dưới bên phải -->
+    <img
+      src="./assets/oishi.mp4"
+      class="oishi-gif"
+      alt="Oishi mascot">
 
+  </div>
+
+</body>
 </html>
