@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,9 +8,7 @@
 
   <title>Oishi AR - Gọi Lộc Vui Xuân</title>
 
-  <script
-    type="module"
-    src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
   </script>
 
   <style>
@@ -91,12 +89,10 @@
       padding: 11px 22px;
       border-radius: 999px;
       color: #8f1114;
-      background: linear-gradient(
-        180deg,
-        #fff0a3,
-        #ffd85b 55%,
-        #efad30
-      );
+      background: linear-gradient(180deg,
+          #fff0a3,
+          #ffd85b 55%,
+          #efad30);
       box-shadow:
         0 4px 0 rgba(111, 5, 9, 0.25),
         0 0 22px rgba(255, 220, 91, 0.2);
@@ -189,12 +185,10 @@
       border: 2px solid #fff0a1;
       border-radius: 999px;
       color: #921017;
-      background: linear-gradient(
-        180deg,
-        #fff0a3,
-        #ffd65b 58%,
-        #f5b839
-      );
+      background: linear-gradient(180deg,
+          #fff0a3,
+          #ffd65b 58%,
+          #f5b839);
       box-shadow:
         0 7px 0 #8d1017,
         0 10px 24px rgba(45, 0, 0, 0.25);
@@ -391,31 +385,21 @@
       </div>
     </header>
 
-    <section class="viewer-container"
-             aria-label="Mascot Oishi chuyển động">
+    <section class="viewer-container" aria-label="Mascot Oishi chuyển động">
 
       <!-- Giữ model gốc để kích hoạt AR -->
-      <model-viewer
-        id="mascot"
-        src="./assets/cartoon+chicken+3d+model.glb"
-        ios-src="./assets/cartoon+chicken+3d+model.usdz"
-        alt="Oishi mascot 3D"
-        ar
-        ar-modes="quick-look"
-        camera-controls
-        autoplay
-        animation-name="Armature|Dance"
-        shadow-intensity="1"
-        exposure="1.05"
-        ar-scale="auto"
+      <model-viewer id="mascot" src="./assets/cartoon+chicken+3d+model.glb"
+        ios-src="./assets/cartoon+chicken+3d+model.usdz" alt="Oishi mascot 3D" ar ar-modes="quick-look" camera-controls
+        autoplay animation-name="Armature|Dance" shadow-intensity="1" exposure="1.05" ar-scale="auto"
         ar-placement="floor">
       </model-viewer>
 
-      <!-- Chỉ GIF được hiển thị trên website -->
-      <img
-        class="preview-gif"
-        src="./assets/oishi.webm"
-        alt="Mascot Oishi chào đón mùa Tết">
+      <!-- Chỉ video được hiển thị trên website -->
+      <video class="preview-gif" autoplay loop muted playsinline preload="auto"
+        aria-label="Mascot Oishi chào đón mùa Tết">
+        <source src="./assets/oishi.webm" type="video/webm">
+        Trình duyệt của bạn không hỗ trợ video.
+      </video>
     </section>
 
     <button type="button" class="ar-cta" id="ar-button">
@@ -480,4 +464,5 @@
     });
   </script>
 </body>
+
 </html>
