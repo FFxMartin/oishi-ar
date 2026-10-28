@@ -319,40 +319,69 @@
         min-height: 360px;
         max-height: 530px;
         border-radius: 22px;
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+
+        background: linear-gradient(180deg,
+            #e91e32 0%,
+            #a90016 100%);
+      }
+
+      .viewer-container video {
+        background-color: transparent;
       }
 
       .preview-gif {
-        padding: 10px;
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+
+        display: block;
+        width: 100%;
+        height: 100%;
+
+        padding: 16px;
+        object-fit: contain;
+        object-position: center;
+
+        background: transparent;
+        border: none;
+        outline: none;
+
+        pointer-events: none;
       }
 
-      .ar-cta {
-        min-height: 60px;
-        margin-top: 23px;
-        font-size: 17px;
-      }
-
-      .steps {
-        gap: 3px;
-      }
-
-      .step {
-        padding: 12px 4px;
-      }
-
-      .step-icon {
-        width: 48px;
-        height: 48px;
-        font-size: 23px;
-      }
-
-      .step-title {
-        font-size: 12px;
-      }
-
-      .step-description {
-        font-size: 11px;
-      }
     }
+
+    .ar-cta {
+      min-height: 60px;
+      margin-top: 23px;
+      font-size: 17px;
+    }
+
+    .steps {
+      gap: 3px;
+    }
+
+    .step {
+      padding: 12px 4px;
+    }
+
+    .step-icon {
+      width: 48px;
+      height: 48px;
+      font-size: 23px;
+    }
+
+    .step-title {
+      font-size: 12px;
+    }
+
+    .step-description {
+      font-size: 11px;
+    }
+
 
     @media (prefers-reduced-motion: reduce) {
       .ar-cta {
@@ -388,15 +417,13 @@
     <section class="viewer-container" aria-label="Mascot Oishi chuyển động">
 
       <!-- Giữ model gốc để kích hoạt AR -->
-      <model-viewer id="mascot" src="./assets/Rumba Dancing.fbx"
-        ios-src="./assets/Rumba Dancing.usdz" alt="Oishi mascot 3D" ar ar-modes="quick-look" camera-controls
-        autoplay animation-name="Armature|Dance" shadow-intensity="1" exposure="1.05" ar-scale="auto"
-        ar-placement="floor">
+      <model-viewer id="mascot" src="./assets/Rumba Dancing.fbx" ios-src="./assets/Rumba Dancing.usdz"
+        alt="Oishi mascot 3D" ar ar-modes="quick-look" camera-controls autoplay animation-name="Armature|Dance"
+        shadow-intensity="1" exposure="1.05" ar-scale="auto" ar-placement="floor">
       </model-viewer>
 
       <!-- Chỉ video được hiển thị trên website -->
-      <video class="preview-gif" autoplay loop muted playsinline preload="auto"
-        aria-label="Mascot Oishi chào đón mùa Tết">
+      <video class="preview-gif" autoplay loop playsinline preload="auto" aria-label="Mascot Oishi chào đón mùa Tết">
         <source src="./assets/oishi.webm" type="video/webm">
         Trình duyệt của bạn không hỗ trợ video.
       </video>
