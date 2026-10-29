@@ -5,31 +5,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#a90d16" />
-
   <title>Oishi AR - Gọi Lộc Vui Xuân</title>
 
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
-  </script>
+  <!-- Tải GIF sớm để hiện nhanh hơn -->
+  <link rel="preload" as="image" href="./assets/oishi.gif" />
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 
   <style>
     :root {
       --red: #bd101b;
-      --red-dark: #790810;
-      --red-light: #e52b35;
       --gold: #ffd75c;
       --gold-light: #fff0a6;
       --cream: #fff8e6;
+      --gold-btn: linear-gradient(180deg, #fff0a3, #ffd65b 58%, #f5b839);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       min-height: 100vh;
       font-family: Arial, sans-serif;
-      color: white;
+      color: #fff;
       text-align: center;
       background:
         radial-gradient(ellipse at 50% 30%, #e51d29 0%, transparent 48%),
@@ -89,21 +86,14 @@
       padding: 11px 22px;
       border-radius: 999px;
       color: #8f1114;
-      background: linear-gradient(180deg,
-          #fff0a3,
-          #ffd85b 55%,
-          #efad30);
-      box-shadow:
-        0 4px 0 rgba(111, 5, 9, 0.25),
-        0 0 22px rgba(255, 220, 91, 0.2);
+      background: linear-gradient(180deg, #fff0a3, #ffd85b 55%, #efad30);
+      box-shadow: 0 4px 0 rgba(111, 5, 9, 0.25), 0 0 22px rgba(255, 220, 91, 0.2);
       font-size: clamp(12px, 2vw, 16px);
       font-weight: 900;
       letter-spacing: 0.5px;
     }
 
-    .spring-badge span {
-      color: #c31920;
-    }
+    .spring-badge span { color: #c31920; }
 
     /* KHUNG MASCOT */
     .viewer-container {
@@ -125,6 +115,7 @@
 
     .viewer-container::before,
     .viewer-container::after {
+      content: "✿";
       position: absolute;
       z-index: 3;
       color: var(--gold);
@@ -133,43 +124,31 @@
       opacity: 0.9;
     }
 
-    .viewer-container::before {
-      content: "✿";
-      top: 16px;
-      left: 20px;
-    }
+    .viewer-container::before { top: 16px; left: 20px; }
+    .viewer-container::after { right: 20px; bottom: 16px; }
 
-    .viewer-container::after {
-      content: "✿";
-      right: 20px;
-      bottom: 16px;
-    }
-
-    /* MODEL 3D ĐƯỢC GIỮ LẠI CHO AR */
-    #mascot {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      display: block;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      pointer-events: none;
-      background: transparent;
-      border-radius: 28px;
-    }
-
-    /* GIF CHỈ HIỆN TRÊN WEBSITE */
+    /* Model 3D: ẩn, chỉ dùng để kích hoạt AR */
+    #mascot,
     .preview-gif {
       position: absolute;
       inset: 0;
-      z-index: 2;
-      display: block;
       width: 100%;
       height: 100%;
+      pointer-events: none;
+    }
+
+    #mascot {
+      z-index: 1;
+      opacity: 0;
+      background: transparent;
+    }
+
+    /* GIF mascot hiển thị trên website */
+    .preview-gif {
+      z-index: 2;
       padding: 16px;
       object-fit: contain;
-      pointer-events: none;
+      object-position: center;
     }
 
     /* CTA MỞ AR */
@@ -185,36 +164,20 @@
       border: 2px solid #fff0a1;
       border-radius: 999px;
       color: #921017;
-      background: linear-gradient(180deg,
-          #fff0a3,
-          #ffd65b 58%,
-          #f5b839);
-      box-shadow:
-        0 7px 0 #8d1017,
-        0 10px 24px rgba(45, 0, 0, 0.25);
+      background: var(--gold-btn);
+      box-shadow: 0 7px 0 #8d1017, 0 10px 24px rgba(45, 0, 0, 0.25);
+      font: inherit;
       font-size: 19px;
       font-weight: 900;
       cursor: pointer;
       transition: transform 0.2s, filter 0.2s;
     }
 
-    .ar-cta:hover {
-      filter: brightness(1.07);
-      transform: translateY(-2px);
-    }
+    .ar-cta:hover { filter: brightness(1.07); transform: translateY(-2px); }
+    .ar-cta:active { transform: translateY(2px); }
+    .ar-cta:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
 
-    .ar-cta:active {
-      transform: translateY(2px);
-    }
-
-    .ar-cta:focus-visible {
-      outline: 3px solid white;
-      outline-offset: 4px;
-    }
-
-    .cta-icon {
-      font-size: 25px;
-    }
+    .cta-icon { font-size: 25px; }
 
     .tagline {
       margin: 19px 0 26px;
@@ -236,9 +199,7 @@
       border-right: 1px solid rgba(255, 215, 92, 0.45);
     }
 
-    .step:last-child {
-      border-right: 0;
-    }
+    .step:last-child { border-right: 0; }
 
     .step-icon {
       display: flex;
@@ -295,98 +256,32 @@
       letter-spacing: 12px;
     }
 
+    /* MOBILE */
     @media (max-width: 600px) {
-      .wrap {
-        padding: 20px 16px 24px;
-      }
-
-      .top-ornament {
-        margin-bottom: 8px;
-      }
-
-      .subtitle {
-        margin-top: 10px;
-        margin-bottom: 14px;
-      }
-
-      .spring-badge {
-        margin-bottom: 18px;
-        padding: 10px 13px;
-      }
+      .wrap { padding: 20px 16px 24px; }
+      .top-ornament { margin-bottom: 8px; }
+      .subtitle { margin: 10px 0 14px; }
+      .spring-badge { margin-bottom: 18px; padding: 10px 13px; }
 
       .viewer-container {
         height: 56vh;
         min-height: 360px;
         max-height: 530px;
         border-radius: 22px;
-        position: relative;
-        isolation: isolate;
-        overflow: hidden;
-
-        background: linear-gradient(180deg,
-            #e91e32 0%,
-            #a90016 100%);
+        background: linear-gradient(180deg, #e91e32, #a90016);
       }
 
-      .viewer-container video {
-        background-color: transparent;
-      }
+      .ar-cta { min-height: 60px; margin-top: 23px; font-size: 17px; }
 
-      .preview-gif {
-        position: absolute;
-        inset: 0;
-        z-index: 2;
-
-        display: block;
-        width: 100%;
-        height: 100%;
-
-        padding: 16px;
-        object-fit: contain;
-        object-position: center;
-
-        background: transparent;
-        border: none;
-        outline: none;
-
-        pointer-events: none;
-      }
-
+      .steps { gap: 3px; }
+      .step { padding: 12px 4px; }
+      .step-icon { width: 48px; height: 48px; font-size: 23px; }
+      .step-title { font-size: 12px; }
+      .step-description { font-size: 11px; }
     }
-
-    .ar-cta {
-      min-height: 60px;
-      margin-top: 23px;
-      font-size: 17px;
-    }
-
-    .steps {
-      gap: 3px;
-    }
-
-    .step {
-      padding: 12px 4px;
-    }
-
-    .step-icon {
-      width: 48px;
-      height: 48px;
-      font-size: 23px;
-    }
-
-    .step-title {
-      font-size: 12px;
-    }
-
-    .step-description {
-      font-size: 11px;
-    }
-
 
     @media (prefers-reduced-motion: reduce) {
-      .ar-cta {
-        transition: none;
-      }
+      .ar-cta { transition: none; }
     }
   </style>
 </head>
@@ -395,38 +290,27 @@
   <main class="wrap">
 
     <header>
-      <div class="top-ornament" aria-hidden="true">
-        ── ❀ ──
-      </div>
-
+      <div class="top-ornament" aria-hidden="true">── ❀ ──</div>
       <div class="eyebrow">XUÂN SUM VẦY • LỘC ĐONG ĐẦY</div>
-
       <h1>Oishi AR</h1>
-
-      <p class="subtitle">
-        TÙNG! TÙNG! TÙNG! — GỌI MASCOT, RƯỚC LỘC XUÂN!
-      </p>
-
+      <p class="subtitle">TÙNG! TÙNG! TÙNG! — GỌI MASCOT, RƯỚC LỘC XUÂN!</p>
       <div class="spring-badge">
-        <span>✿</span>
-        TẾT RỘN RÀNG · LỘC NGẬP TRÀN
-        <span>✿</span>
+        <span>✿</span> TẾT RỘN RÀNG · LỘC NGẬP TRÀN <span>✿</span>
       </div>
     </header>
 
     <section class="viewer-container" aria-label="Mascot Oishi chuyển động">
-
-      <!-- Giữ model gốc để kích hoạt AR -->
-      <model-viewer id="mascot" src="./assets/Rumba Dancing.fbx" ios-src="./assets/Rumba Dancing.usdz"
-        alt="Oishi mascot 3D" ar ar-modes="quick-look" camera-controls autoplay animation-name="Armature|Dance"
+      <!-- Model 3D ẩn, dùng để kích hoạt AR.
+           Lưu ý: model-viewer chỉ đọc .glb/.gltf (không đọc .fbx),
+           và nên đặt tên file không có dấu cách. -->
+      <model-viewer id="mascot" src="./assets/RumbaDancing.glb" ios-src="./assets/RumbaDancing.usdz"
+        alt="Oishi mascot 3D" ar ar-modes="webxr scene-viewer quick-look" autoplay animation-name="Armature|Dance"
         shadow-intensity="1" exposure="1.05" ar-scale="auto" ar-placement="floor">
       </model-viewer>
 
-      <!-- Chỉ video được hiển thị trên website -->
-      <video class="preview-gif" autoplay loop playsinline preload="auto" aria-label="Mascot Oishi chào đón mùa Tết">
-        <source src="./assets/oishi.mp4" type="video/mp4">
-        Trình duyệt của bạn không hỗ trợ video.
-      </video>
+      <!-- GIF trong suốt: dùng thẻ <img>, không phải <video> -->
+      <img class="preview-gif" src="./assets/oishi.gif" width="528" height="560"
+        alt="Mascot Oishi chào đón mùa Tết" decoding="async" />
     </section>
 
     <button type="button" class="ar-cta" id="ar-button">
@@ -435,33 +319,23 @@
       <span aria-hidden="true">✦</span>
     </button>
 
-    <p class="tagline">
-      Đưa mascot Oishi vào không gian Tết của bạn
-    </p>
+    <p class="tagline">Đưa mascot Oishi vào không gian Tết của bạn</p>
 
     <section class="steps" aria-label="Hướng dẫn trải nghiệm">
       <div class="step">
         <div class="step-icon" aria-hidden="true">📱</div>
         <p class="step-title">Mở camera</p>
-        <p class="step-description">
-          Bắt đầu trải nghiệm AR
-        </p>
+        <p class="step-description">Bắt đầu trải nghiệm AR</p>
       </div>
-
       <div class="step">
         <div class="step-icon" aria-hidden="true">🐥</div>
         <p class="step-title">Gọi mascot</p>
-        <p class="step-description">
-          Đón gà Oishi vào cuộc vui
-        </p>
+        <p class="step-description">Đón gà Oishi vào cuộc vui</p>
       </div>
-
       <div class="step">
         <div class="step-icon" aria-hidden="true">✨</div>
         <p class="step-title">Vui cùng Tết</p>
-        <p class="step-description">
-          Tạo khoảnh khắc thật vui
-        </p>
+        <p class="step-description">Tạo khoảnh khắc thật vui</p>
       </div>
     </section>
 
@@ -474,20 +348,12 @@
 
   <script>
     const mascot = document.getElementById("mascot");
-    const arButton = document.getElementById("ar-button");
-
-    arButton.addEventListener("click", () => {
+    document.getElementById("ar-button").addEventListener("click", () => {
       if (!mascot.canActivateAR) {
-        alert(
-          "Thiết bị hoặc trình duyệt hiện tại chưa hỗ trợ AR. " +
-          "Hãy thử mở trang trên thiết bị di động tương thích."
-        );
+        alert("Thiết bị hoặc trình duyệt hiện tại chưa hỗ trợ AR. Hãy thử mở trang trên thiết bị di động tương thích.");
         return;
       }
-
-      // Kích hoạt AR bằng chính model 3D gốc.
-      // Lệnh được gọi trực tiếp từ thao tác bấm của người dùng.
-      mascot.activateAR();
+      mascot.activateAR(); // gọi trực tiếp từ thao tác bấm của người dùng
     });
   </script>
 </body>
